@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import UserSearch from "@/components/search/UserSearch";
 import {
   Bell,
   ChevronDown,
@@ -45,6 +46,8 @@ export default function Navbar() {
   const userEmail = user?.email || "";
 
   const userImage = user?.image || "";
+
+  const userActiveStatus = user?.isOnline;
 
   const userInitial = userName.trim().charAt(0).toUpperCase();
 
@@ -190,18 +193,8 @@ export default function Navbar() {
         {/* ========================================
             DESKTOP SEARCH
         ======================================== */}
-
-        <div className="mx-4 min-w-0 max-w-xl flex-1 md:mx-6 md:flex lg:mx-8">
-          <label className="input input-bordered flex w-full items-center gap-2 rounded-xl bg-base-200">
-            <Search size={18} className="shrink-0 text-base-content/50" />
-
-            <input
-              type="search"
-              placeholder="Search messages, people..."
-              className="grow bg-transparent outline-none"
-              aria-label="Search messages and people"
-            />
-          </label>
+        <div className="mx-4 min-w-0 max-w-xl flex-1 md:mx-6 lg:mx-8">
+          <UserSearch />
         </div>
 
         {/* ========================================
@@ -360,9 +353,22 @@ export default function Navbar() {
                       </p>
                     )}
 
-                    <p className="mt-1 flex items-center gap-1 text-xs text-success">
-                      <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                      Online
+                    <p
+                      className={`mt-1 flex items-center gap-1 text-xs ${
+                        userActiveStatus === true
+                          ? "text-success"
+                          : "text-base-content/50"
+                      }`}
+                    >
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          userActiveStatus === true
+                            ? "bg-success"
+                            : "bg-base-content/30"
+                        }`}
+                      />
+
+                      {userActiveStatus === true ? "Online" : "Offline"}
                     </p>
                   </div>
                 </div>

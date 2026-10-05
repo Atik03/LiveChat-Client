@@ -13,29 +13,40 @@ import {
 } from "lucide-react";
 
 export default function ChatWindow({ chat, onBack }) {
+  /* ==========================================
+     NO CONVERSATION SELECTED
+  ========================================== */
+
   if (!chat) {
     return (
-      <section className="hidden flex-1 items-center justify-center bg-base-200 md:flex">
-        <div className="flex max-w-md flex-col items-center px-6 text-center">
-          <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
-            <MessageCircle size={30} className="text-primary" />
+      <section className="flex h-full min-h-0 min-w-0 flex-1 flex-col bg-base-200">
+        <div className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto">
+          <div className="flex max-w-md flex-col items-center px-6 text-center">
+            <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10">
+              <MessageCircle size={30} className="text-primary" />
+            </div>
+
+            <h2 className="text-xl font-bold">Welcome to LiveChat</h2>
+
+            <p className="mt-2 text-sm leading-6 text-base-content/50">
+              Select a conversation from the left or search for a user to start
+              chatting.
+            </p>
           </div>
-
-          <h2 className="text-xl font-bold">Welcome to LiveChat</h2>
-
-          <p className="mt-2 text-sm leading-6 text-base-content/50">
-            Select a conversation from the left or search for a user to start
-            chatting.
-          </p>
         </div>
       </section>
     );
   }
 
+  /* ==========================================
+     CHAT VIEW
+  ========================================== */
+
   return (
-    <section className="flex min-w-0 flex-1 flex-col bg-base-100">
+    <section className="flex h-full min-h-0 min-w-0 flex-1 flex-col bg-base-100">
       {/* Chat Header */}
       <header className="flex h-16 shrink-0 items-center justify-between border-b border-base-300 px-4">
+        {/* User Information */}
         <div className="flex min-w-0 items-center gap-3">
           {/* Mobile Back */}
           <button
@@ -89,13 +100,15 @@ export default function ChatWindow({ chat, onBack }) {
       </header>
 
       {/* Messages */}
-      <div className="flex flex-1 items-center justify-center overflow-y-auto bg-base-200/40 px-4">
-        <div className="text-center">
-          <p className="text-sm text-base-content/40">No messages yet.</p>
+      <div className="min-h-0 flex-1 overflow-y-auto bg-base-200/40 px-4">
+        <div className="flex min-h-full items-center justify-center py-6">
+          <div className="text-center">
+            <p className="text-sm text-base-content/40">No messages yet.</p>
 
-          <p className="mt-1 text-xs text-base-content/30">
-            Send a message to start the conversation.
-          </p>
+            <p className="mt-1 text-xs text-base-content/30">
+              Send a message to start the conversation.
+            </p>
+          </div>
         </div>
       </div>
 

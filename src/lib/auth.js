@@ -29,6 +29,19 @@ export const auth = betterAuth({
         input: false,
         returned: true,
       },
+      isOnline: {
+        type: "boolean",
+        required: false,
+        input: false,
+        returned: true,
+      },
+
+      lastSeen: {
+        type: "date",
+        required: false,
+        input: false,
+        returned: true,
+      },
     },
   },
 
@@ -42,6 +55,8 @@ export const auth = betterAuth({
             data: {
               ...user,
               username,
+              isOnline: true,
+              lastSeen: null,
             },
           };
         },
